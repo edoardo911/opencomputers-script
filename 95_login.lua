@@ -19,6 +19,7 @@ end
 
 event.listen("init", function()
 	repeat
+		pwd = ""
 		term.clear()
 		gpu.setForeground(0xFF0000)
 		print("LOGIN\n")
