@@ -49,6 +49,11 @@ elseif ops["c"] and ops["r"] == nil then
 						io.write("Type path: ")
 						path = io.read()
 						file = io.open(path, "r")
+						if string.sub(path, 1, 1) == "/" then
+							size = fs.size(path)
+						else
+							size = fs.size(shell.resolve(path))
+						end
 						if file == nil then
 							gpu.setForeground(0xFF0000)
 							print("Error: file not found.")
@@ -57,8 +62,17 @@ elseif ops["c"] and ops["r"] == nil then
 							modem.send(address, port, fs.name(path))
 							event.pull("modem_message")
 							n = 0
+							c = 0
+							io.write("Progress:")
 							while n ~= nil do
 								n = file:read(1)
+								c = c + 1
+								term.clearLine()
+								perc = (math.floor((c / size) * 100) / 10)
+								if perc > 100 then
+									perc = 100
+								end
+								io.write("Progress: " .. perc .. "%")
 								modem.send(address, port, n)
 								event.pull("modem_message")
 							end
