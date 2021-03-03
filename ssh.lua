@@ -6,7 +6,7 @@ local term = require("term")
 local shell = require("shell")
 local fs = require("filesystem")
 
-local version = "1.0.0"
+local version = "1.0.1"
 local port = 22
 local state = 0
 local address = 0
@@ -77,6 +77,7 @@ elseif ops["c"] and ops["r"] == nil then
 								event.pull("modem_message")
 							end
 							file:close()
+							print("\nTransfer completed")
 						end
 					elseif cmd == "clear" then
 						term.clear()
