@@ -110,6 +110,7 @@ elseif ops["c"] == nil and ops["r"] then
 	end
 	
 	event.pullFiltered(receive)
+	modem.send(address, port, "")
 	modem.close(port)
 	term.clear()
 end
