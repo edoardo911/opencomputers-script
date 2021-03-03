@@ -114,6 +114,7 @@ elseif ops["c"] == nil and ops["r"] then
 				address = select(2, ...)
 				file = io.open(revc, "w")
 				modem.send(address, port, "")
+				event.pull("modem_message")
 			elseif not i then
 				file:write(recv)
 				modem.send(address, port, "")
